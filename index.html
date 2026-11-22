@@ -1,0 +1,1379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MCC - UG Medical Counselling 2026 | Round II Registration Portal</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter & Roboto Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Roboto+Mono:wght@500;600&display=swap" rel="stylesheet">
+    <!-- Font Awesome for crisp official icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['Roboto Mono', 'monospace'],
+                    },
+                    colors: {
+                        nicNavy: '#0f3d68',
+                        nicRoyal: '#1a5694',
+                        nicLight: '#eef4fa',
+                        nicSaffron: '#e67e22',
+                        nicGreen: '#138808',
+                        nicBg: '#f4f7fa',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom styles for NIC portal polish & print formatting */
+        body {
+            background-color: #f4f7fa;
+            color: #1e293b;
+        }
+
+        .gov-stripe {
+            height: 4px;
+            background: linear-gradient(90deg, #FF9933 0%, #FF9933 33.3%, #FFFFFF 33.3%, #FFFFFF 66.6%, #138808 66.6%, #138808 100%);
+        }
+
+        .step-connector {
+            transition: background-color 0.3s ease;
+        }
+
+        /* Smooth fade transition between steps */
+        .step-panel {
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Print Media Styles so "Download Confirmation Page (PDF / Print)" looks like an authentic NIC slip */
+        @media print {
+            body {
+                background-color: #ffffff !important;
+                color: #000000 !important;
+                font-size: 12pt;
+            }
+            .no-print {
+                display: none !important;
+            }
+            .print-only {
+                display: block !important;
+            }
+            .print-container {
+                box-shadow: none !important;
+                border: 1.5px solid #0f3d68 !important;
+                margin: 0 !important;
+                padding: 16px !important;
+                width: 100% !important;
+                max-width: 100% !important;
+            }
+            header {
+                border-bottom: 2px solid #0f3d68 !important;
+            }
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between antialiased">
+
+    <!-- Top Utility Bar -->
+    <div class="bg-[#092744] text-white text-xs py-1.5 px-4 border-b border-blue-900 no-print">
+        <div class="max-w-6xl mx-auto flex flex-wrap justify-between items-center gap-2">
+            <div class="flex items-center space-x-3">
+                <span class="font-medium tracking-wide">भारत सरकार | GOVERNMENT OF INDIA</span>
+                <span class="text-blue-300">|</span>
+                <span class="text-blue-100">स्वास्थ्य एवं परिवार कल्याण मंत्रालय | Ministry of Health & Family Welfare</span>
+            </div>
+            <div class="flex items-center space-x-4 text-blue-200">
+                <span><i class="fa-solid fa-phone-volume mr-1"></i> Toll Free: +91-755-534-9988</span>
+                <span class="hidden sm:inline">|</span>
+                <span class="hidden sm:inline font-mono text-white" id="live-clock">--:--:-- IST</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Official Government Header -->
+    <header class="bg-white shadow-sm border-b border-slate-200">
+        <div class="gov-stripe"></div>
+        <div class="max-w-6xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+            <!-- Left Emblem & Title -->
+            <div class="flex items-center space-x-4 text-center md:text-left">
+                <!-- Stylized Ashoka Emblem / Medical Crest SVG -->
+                <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-nicLight border-2 border-nicNavy flex flex-col items-center justify-center shrink-0 shadow-inner">
+                    <svg class="w-9 h-9 text-nicNavy" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="National Emblem Placeholder">
+                        <circle cx="32" cy="24" r="14" stroke="currentColor" stroke-width="2.5"/>
+                        <circle cx="32" cy="24" r="3" fill="#e67e22"/>
+                        <path d="M32 10V38M18 24H46M22 14L42 34M42 14L22 34" stroke="currentColor" stroke-width="1.5"/>
+                        <rect x="16" y="42" width="32" height="6" rx="2" fill="currentColor"/>
+                        <path d="M12 52H52" stroke="#e67e22" stroke-width="3" stroke-linecap="round"/>
+                    </svg>
+                    <span class="text-[7px] font-bold tracking-tighter text-nicNavy uppercase mt-0.5">सत्यमेव जयते</span>
+                </div>
+                <div>
+                    <p class="text-xs font-semibold uppercase tracking-wider text-nicRoyal">Directorate General of Health Services (DGHS)</p>
+                    <h1 class="text-lg sm:text-2xl font-extrabold text-nicNavy leading-tight">
+                        Medical Counselling Committee (MCC)
+                    </h1>
+                    <p class="text-xs sm:text-sm font-medium text-slate-600">
+                        UG Medical Counselling 2026 &mdash; <span class="text-nicSaffron font-bold">Round II Registration & Seat Surrender Portal</span>
+                    </p>
+                </div>
+            </div>
+
+            <!-- Right NIC / Digital India Badges -->
+            <div class="flex items-center space-x-3 shrink-0 no-print">
+                <div class="px-3 py-1.5 rounded-lg bg-slate-50 border border-slate-200 text-right">
+                    <div class="text-[10px] uppercase font-bold text-slate-400 tracking-wider">Academic Session</div>
+                    <div class="text-sm font-bold text-nicNavy font-mono">NEET-UG 2026 (R-II)</div>
+                </div>
+                <div class="px-3 py-1.5 rounded-lg bg-nicNavy text-white text-center shadow-sm">
+                    <div class="text-[10px] uppercase tracking-widest text-blue-200">Powered By</div>
+                    <div class="text-sm font-extrabold tracking-tight">NIC <span class="font-normal text-xs">eCounselling</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Disclaimer Banner -->
+        <div class="bg-amber-50 border-t border-b border-amber-200 px-4 py-2 text-xs text-amber-900 no-print">
+            <div class="max-w-6xl mx-auto flex items-center justify-center text-center gap-2">
+                <i class="fa-solid fa-circle-info text-amber-600 text-sm shrink-0"></i>
+                <span>
+                    <strong>About:</strong> Round II Counseling 2026 window .
+                </span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="flex-grow max-w-5xl w-full mx-auto px-4 py-6 sm:py-8">
+
+        <!-- 4-Step Visual Progress Stepper Bar -->
+        <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-4 sm:p-6 mb-6 no-print">
+            <div class="grid grid-cols-4 gap-2 sm:gap-4 relative">
+                <!-- Step 1 Indicator -->
+                <div id="stepper-1" class="flex flex-col items-center text-center relative z-10">
+                    <div class="step-circle w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center font-bold text-sm bg-nicNavy text-white ring-4 ring-blue-100 transition-all">
+                        1
+                    </div>
+                    <span class="step-label mt-2 text-[11px] sm:text-xs font-bold text-nicNavy leading-tight">Round I Declaration & Surrender</span>
+                </div>
+
+                <!-- Step 2 Indicator -->
+                <div id="stepper-2" class="flex flex-col items-center text-center relative z-10">
+                    <div class="step-circle w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center font-bold text-sm bg-slate-200 text-slate-600 transition-all">
+                        2
+                    </div>
+                    <span class="step-label mt-2 text-[11px] sm:text-xs font-medium text-slate-500 leading-tight">Candidate Details</span>
+                </div>
+
+                <!-- Step 3 Indicator -->
+                <div id="stepper-3" class="flex flex-col items-center text-center relative z-10">
+                    <div class="step-circle w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center font-bold text-sm bg-slate-200 text-slate-600 transition-all">
+                        3
+                    </div>
+                    <span class="step-label mt-2 text-[11px] sm:text-xs font-medium text-slate-500 leading-tight">Fee Payment (INR 6,500)</span>
+                </div>
+
+                <!-- Step 4 Indicator -->
+                <div id="stepper-4" class="flex flex-col items-center text-center relative z-10">
+                    <div class="step-circle w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center font-bold text-sm bg-slate-200 text-slate-600 transition-all">
+                        4
+                    </div>
+                    <span class="step-label mt-2 text-[11px] sm:text-xs font-medium text-slate-500 leading-tight">Confirmation & Receipt</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Custom Notification / Toast Alert Box (Replaces browser alert()) -->
+        <div id="alert-box" class="hidden mb-6 rounded-xl p-4 border flex items-start gap-3 shadow-sm transition-all no-print" role="alert">
+            <i id="alert-icon" class="fa-solid fa-triangle-exclamation mt-0.5 text-lg"></i>
+            <div class="flex-grow text-sm">
+                <h4 id="alert-title" class="font-bold">Validation Required</h4>
+                <p id="alert-message" class="mt-0.5">Please complete all required fields.</p>
+            </div>
+            <button type="button" onclick="hideAlert()" class="text-slate-400 hover:text-slate-700 p-1">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+
+        <!-- ===================================================================== -->
+        <!-- STEP 1: ROUND I COMPLETION DECLARATION & COLLEGE HANDOVER              -->
+        <!-- ===================================================================== -->
+        <section id="step-1-panel" class="step-panel bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+            <div class="bg-nicNavy text-white px-6 py-4 flex items-center justify-between">
+                <div>
+                    <span class="text-xs uppercase tracking-wider text-blue-200 font-semibold">Step 1 of 4</span>
+                    <h2 class="text-lg sm:text-xl font-bold">Round I Completion Declaration & College Handover</h2>
+                </div>
+                <i class="fa-solid fa-file-signature text-2xl text-blue-200 hidden sm:block"></i>
+            </div>
+
+            <div class="p-6 sm:p-8 space-y-6">
+                <!-- Important Instruction Box -->
+                <div class="bg-nicLight border-l-4 border-nicRoyal rounded-r-lg p-4 text-sm text-slate-700">
+                    <h3 class="font-bold text-nicNavy mb-1 flex items-center gap-2">
+                        <i class="fa-solid fa-bullhorn text-nicRoyal"></i> Mandatory Round II Eligibility Rule
+                    </h3>
+                    <p class="leading-relaxed">
+                        Candidates who participated in <strong>NEET-UG 2026 Round I Counselling</strong> and wish to upgrade or participate in <strong>Round II Counselling</strong> must formally declare the completion of Round I formalities and surrender their <strong>Third Choice (3rd Preference)</strong> allotted institution before proceeding to candidate verification and fee payment.
+                    </p>
+                </div>
+
+                <!-- Formal Declaration Checkbox Card -->
+                <div class="border-2 border-slate-200 rounded-xl p-5 bg-slate-50/70 hover:border-nicRoyal/50 transition-colors" id="declaration-card">
+                    <label for="round1-declaration-checkbox" class="flex items-start gap-4 cursor-pointer select-none">
+                        <input
+                            type="checkbox"
+                            id="round1-declaration-checkbox"
+                            class="mt-1 w-5 h-5 rounded border-slate-300 text-nicNavy focus:ring-nicRoyal cursor-pointer shrink-0"
+                        >
+                        <div class="text-sm sm:text-base text-slate-800 leading-relaxed">
+                            <span class="font-semibold text-nicNavy block mb-1">Self-Declaration & Consent Statement <span class="text-red-600">*</span></span>
+                            "I hereby declare that I have successfully completed my Round I counselling process and am formally handing over / surrendering my third choice of college allotted in Round I to participate in Round II counseling."
+                        </div>
+                    </label>
+                    <p id="err-checkbox" class="hidden text-red-600 text-xs font-semibold mt-2 ml-9">
+                        <i class="fa-solid fa-circle-exclamation mr-1"></i> You must check the declaration box above to confirm Round I completion and college handover.
+                    </p>
+                </div>
+
+                <!-- Description Box for Handing Over College -->
+                <div>
+                    <label for="handover-college-input" class="block text-sm font-bold text-slate-800 mb-2">
+                        Name & Details of Handing Over College (Round I - 3rd Choice) <span class="text-red-600">*</span>
+                    </label>
+                    <textarea
+                        id="handover-college-input"
+                        rows="4"
+                        placeholder="Enter the complete official name, city/state, and college code (if available) of your Round I 3rd choice college being handed over (e.g., Vardhman Mahavir Medical College & Safdarjung Hospital, New Delhi - MBBS Quota)..."
+                        class="w-full rounded-xl border border-slate-300 px-4 py-3 text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-nicRoyal focus:border-nicRoyal transition-all"
+                    ></textarea>
+                    <div class="flex flex-wrap justify-between items-center mt-1.5 gap-2">
+                        <p id="err-college" class="hidden text-red-600 text-xs font-semibold">
+                            <i class="fa-solid fa-circle-exclamation mr-1"></i> Please enter the valid name and details of the handing over college (minimum 5 characters).
+                        </p>
+                        <span class="text-xs text-slate-400 ml-auto">Mandatory for Round II Seat Matrix Clearance</span>
+                    </div>
+                </div>
+
+                <!-- Action Button -->
+                <div class="pt-4 border-t border-slate-200 flex justify-end">
+                    <button
+                        type="button"
+                        id="btn-step1-submit"
+                        onclick="handleStep1Submit()"
+                        class="w-full sm:w-auto px-7 py-3.5 rounded-xl bg-nicNavy hover:bg-nicRoyal text-white font-bold text-sm shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2 cursor-pointer"
+                    >
+                        <span>Submit & Proceed</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================================================================== -->
+        <!-- STEP 2: CANDIDATE PERSONAL & NEET UG DETAILS                          -->
+        <!-- ===================================================================== -->
+        <section id="step-2-panel" class="step-panel hidden bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+            <div class="bg-nicNavy text-white px-6 py-4 flex items-center justify-between">
+                <div>
+                    <span class="text-xs uppercase tracking-wider text-blue-200 font-semibold">Step 2 of 4</span>
+                    <h2 class="text-lg sm:text-xl font-bold">Candidate Personal & NTA NEET-UG 2026 Details</h2>
+                </div>
+                <i class="fa-solid fa-user-graduate text-2xl text-blue-200 hidden sm:block"></i>
+            </div>
+
+            <form id="candidate-details-form" onsubmit="event.preventDefault(); handleStep2Submit();" class="p-6 sm:p-8 space-y-6" novalidate>
+                <!-- Summary pill of Step 1 -->
+                <div class="bg-emerald-50 border border-emerald-200 rounded-xl px-4 py-3 flex items-center justify-between gap-3 text-xs sm:text-sm text-emerald-900">
+                    <div class="flex items-center gap-2.5">
+                        <i class="fa-solid fa-circle-check text-emerald-600 text-base"></i>
+                        <span><strong>Round I Surrender Recorded:</strong> <span id="step2-college-preview" class="font-medium"></span></span>
+                    </div>
+                    <button type="button" onclick="goToStep(1)" class="text-nicRoyal font-bold underline shrink-0 hover:text-nicNavy">Edit</button>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Full Name -->
+                    <div class="md:col-span-2">
+                        <label for="cand-name" class="block text-sm font-bold text-slate-800 mb-1.5">
+                            Full Name of Candidate (As per NTA NEET-UG Admit Card) <span class="text-red-600">*</span>
+                        </label>
+                        <div class="relative">
+                            <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-slate-400">
+                                <i class="fa-solid fa-user"></i>
+                            </span>
+                            <input
+                                type="text"
+                                id="cand-name"
+                                placeholder="e.g., AARAV SHARMA"
+                                class="w-full rounded-xl border border-slate-300 pl-10 pr-4 py-3 text-sm text-slate-800 uppercase focus:outline-none focus:ring-2 focus:ring-nicRoyal focus:border-nicRoyal"
+                            >
+                        </div>
+                        <p id="err-name" class="hidden text-red-600 text-xs font-semibold mt-1"></p>
+                    </div>
+
+                    <!-- Age -->
+                    <div>
+                        <label for="cand-age" class="block text-sm font-bold text-slate-800 mb-1.5">
+                            Age (in Completed Years) <span class="text-red-600">*</span>
+                        </label>
+                        <div class="relative">
+                            <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-slate-400">
+                                <i class="fa-solid fa-calendar-day"></i>
+                            </span>
+                            <input
+                                type="number"
+                                id="cand-age"
+                                min="17"
+                                max="45"
+                                placeholder="e.g., 19"
+                                class="w-full rounded-xl border border-slate-300 pl-10 pr-4 py-3 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-nicRoyal focus:border-nicRoyal"
+                            >
+                        </div>
+                        <p id="err-age" class="hidden text-red-600 text-xs font-semibold mt-1"></p>
+                    </div>
+
+                    <!-- Gender -->
+                    <div>
+                        <label for="cand-gender" class="block text-sm font-bold text-slate-800 mb-1.5">
+                            Gender <span class="text-red-600">*</span>
+                        </label>
+                        <div class="relative">
+                            <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-slate-400">
+                                <i class="fa-solid fa-venus-mars"></i>
+                            </span>
+                            <select
+                                id="cand-gender"
+                                class="w-full rounded-xl border border-slate-300 pl-10 pr-4 py-3 text-sm text-slate-800 bg-white focus:outline-none focus:ring-2 focus:ring-nicRoyal focus:border-nicRoyal"
+                            >
+                                <option value="">-- Select Gender --</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                                <option value="Transgender / Other">Transgender / Other</option>
+                            </select>
+                        </div>
+                        <p id="err-gender" class="hidden text-red-600 text-xs font-semibold mt-1"></p>
+                    </div>
+
+                    <!-- NTA NEET UG Roll Number -->
+                    <div>
+                        <label for="cand-roll" class="block text-sm font-bold text-slate-800 mb-1.5">
+                            NTA NEET-UG 2026 Roll Number (10 Digits) <span class="text-red-600">*</span>
+                        </label>
+                        <div class="relative">
+                            <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-slate-400">
+                                <i class="fa-solid fa-id-badge"></i>
+                            </span>
+                            <input
+                                type="text"
+                                id="cand-roll"
+                                inputmode="numeric"
+                                maxlength="10"
+                                placeholder="e.g., 4601023948"
+                                class="w-full rounded-xl border border-slate-300 pl-10 pr-4 py-3 text-sm font-mono text-slate-800 focus:outline-none focus:ring-2 focus:ring-nicRoyal focus:border-nicRoyal"
+                            >
+                        </div>
+                        <p class="text-[11px] text-slate-400 mt-1">Enter your 10-digit numeric NEET-UG Roll Number.</p>
+                        <p id="err-roll" class="hidden text-red-600 text-xs font-semibold mt-1"></p>
+                    </div>
+
+                    <!-- Identity Number (Aadhaar Number) -->
+                    <div>
+                        <label for="cand-aadhaar" class="block text-sm font-bold text-slate-800 mb-1.5">
+                            Identity Number (12-Digit Aadhaar Number) <span class="text-red-600">*</span>
+                        </label>
+                        <div class="relative">
+                            <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-slate-400">
+                                <i class="fa-solid fa-fingerprint"></i>
+                            </span>
+                            <input
+                                type="text"
+                                id="cand-aadhaar"
+                                inputmode="numeric"
+                                maxlength="14"
+                                placeholder="XXXX XXXX XXXX"
+                                class="w-full rounded-xl border border-slate-300 pl-10 pr-4 py-3 text-sm font-mono text-slate-800 tracking-wider focus:outline-none focus:ring-2 focus:ring-nicRoyal focus:border-nicRoyal"
+                            >
+                        </div>
+                        <p class="text-[11px] text-slate-400 mt-1">UIDAI 12-digit number (masked on final receipt for security).</p>
+                        <p id="err-aadhaar" class="hidden text-red-600 text-xs font-semibold mt-1"></p>
+                    </div>
+                </div>
+
+                <!-- Navigation Buttons -->
+                <div class="pt-5 border-t border-slate-200 flex flex-col-reverse sm:flex-row justify-between items-center gap-3">
+                    <button
+                        type="button"
+                        onclick="goToStep(1)"
+                        class="w-full sm:w-auto px-6 py-3 rounded-xl border border-slate-300 bg-white hover:bg-slate-50 text-slate-700 font-semibold text-sm transition-all flex items-center justify-center gap-2 cursor-pointer"
+                    >
+                        <i class="fa-solid fa-arrow-left"></i>
+                        <span>Back to Step 1</span>
+                    </button>
+
+                    <button
+                        type="submit"
+                        class="w-full sm:w-auto px-7 py-3.5 rounded-xl bg-nicNavy hover:bg-nicRoyal text-white font-bold text-sm shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2 cursor-pointer"
+                    >
+                        <span>Submit Details & Proceed to Payment</span>
+                        <i class="fa-solid fa-indian-rupee-sign"></i>
+                    </button>
+                </div>
+            </form>
+        </section>
+
+        <!-- ===================================================================== -->
+        <!-- STEP 3: ROUND II COUNSELING REGISTRATION FEE PAYMENT (INR 6,500)      -->
+        <!-- ===================================================================== -->
+        <section id="step-3-panel" class="step-panel hidden space-y-6">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- Left Column: Order & Candidate Fee Summary -->
+                <div class="lg:col-span-1 space-y-4">
+                    <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                        <div class="bg-nicNavy text-white px-5 py-3.5">
+                            <span class="text-[11px] uppercase tracking-wider text-blue-200 font-semibold">Fee Summary</span>
+                            <h3 class="text-base font-bold">Round II Registration Fee</h3>
+                        </div>
+                        <div class="p-5 space-y-4 text-sm">
+                            <div class="pb-3 border-b border-slate-100">
+                                <span class="text-xs text-slate-400 block">Candidate Name</span>
+                                <span id="pay-summary-name" class="font-bold text-slate-800 uppercase">--</span>
+                            </div>
+                            <div class="pb-3 border-b border-slate-100">
+                                <span class="text-xs text-slate-400 block">NTA NEET-UG Roll Number</span>
+                                <span id="pay-summary-roll" class="font-mono font-semibold text-slate-800">--</span>
+                            </div>
+                            <div class="pb-3 border-b border-slate-100">
+                                <span class="text-xs text-slate-400 block">Fee Description</span>
+                                <span class="font-medium text-slate-700">MCC Round II Counseling Registration & Processing Fee</span>
+                            </div>
+                            <div class="bg-nicLight rounded-xl p-4 border border-blue-200">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-xs font-bold uppercase text-nicNavy">Total Payable</span>
+                                    <span class="text-xl font-extrabold text-nicNavy font-mono">₹ 6,500.00</span>
+                                </div>
+                                <p class="text-[11px] text-slate-600 mt-1">INR Six Thousand Five Hundred Only (Inclusive of Gateway Charges)</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-xl p-4 border border-slate-200 text-xs text-slate-500 flex items-center gap-3">
+                        <i class="fa-solid fa-shield-halved text-nicGreen text-xl shrink-0"></i>
+                        <span>256-Bit SSL Encrypted Government e-Payment Gateway (NIC-Pay / SBIePay Simulated)</span>
+                    </div>
+                </div>
+
+                <!-- Right Column: Interactive Payment Gateway -->
+                <div class="lg:col-span-2 bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                    <div class="bg-nicRoyal text-white px-6 py-4 flex items-center justify-between">
+                        <div>
+                            <span class="text-xs uppercase tracking-wider text-blue-200 font-semibold">Step 3 of 4</span>
+                            <h2 class="text-lg sm:text-xl font-bold">Select Payment Method</h2>
+                        </div>
+                        <i class="fa-solid fa-lock text-xl text-blue-200"></i>
+                    </div>
+
+                    <div class="p-6">
+                        <!-- 4 Selectable Payment Method Tabs -->
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 mb-6" role="tablist">
+                            <button
+                                type="button"
+                                onclick="selectPaymentMethod('UPI')"
+                                id="tab-UPI"
+                                class="pay-tab active flex flex-col items-center justify-center p-3 rounded-xl border-2 border-nicNavy bg-nicLight text-nicNavy font-bold text-xs sm:text-sm transition-all cursor-pointer"
+                            >
+                                <i class="fa-solid fa-qrcode text-lg mb-1"></i>
+                                <span>UPI</span>
+                            </button>
+
+                            <button
+                                type="button"
+                                onclick="selectPaymentMethod('Wallet')"
+                                id="tab-Wallet"
+                                class="pay-tab flex flex-col items-center justify-center p-3 rounded-xl border-2 border-slate-200 bg-white hover:bg-slate-50 text-slate-600 font-semibold text-xs sm:text-sm transition-all cursor-pointer"
+                            >
+                                <i class="fa-solid fa-wallet text-lg mb-1"></i>
+                                <span>Wallet</span>
+                            </button>
+
+                            <button
+                                type="button"
+                                onclick="selectPaymentMethod('Credit / Debit Card')"
+                                id="tab-Card"
+                                class="pay-tab flex flex-col items-center justify-center p-3 rounded-xl border-2 border-slate-200 bg-white hover:bg-slate-50 text-slate-600 font-semibold text-xs sm:text-sm transition-all cursor-pointer"
+                            >
+                                <i class="fa-regular fa-credit-card text-lg mb-1"></i>
+                                <span>Credit / Debit Card</span>
+                            </button>
+
+                            <button
+                                type="button"
+                                onclick="selectPaymentMethod('Internet Banking')"
+                                id="tab-NetBanking"
+                                class="pay-tab flex flex-col items-center justify-center p-3 rounded-xl border-2 border-slate-200 bg-white hover:bg-slate-50 text-slate-600 font-semibold text-xs sm:text-sm transition-all cursor-pointer"
+                            >
+                                <i class="fa-solid fa-building-columns text-lg mb-1"></i>
+                                <span>Internet Banking</span>
+                            </button>
+                        </div>
+
+                        <!-- Payment Method Panels -->
+                        <!-- 1. UPI Panel -->
+                        <div id="panel-UPI" class="pay-method-panel space-y-5">
+                            <div class="flex flex-wrap items-center gap-2 pb-3 border-b border-slate-100">
+                                <span class="text-xs font-semibold text-slate-500 mr-1">Supported UPI Apps:</span>
+                                <span class="px-2.5 py-1 rounded-md bg-slate-100 text-slate-700 text-xs font-bold border border-slate-200">BHIM UPI</span>
+                                <span class="px-2.5 py-1 rounded-md bg-blue-50 text-blue-700 text-xs font-bold border border-blue-200">Google Pay</span>
+                                <span class="px-2.5 py-1 rounded-md bg-purple-50 text-purple-700 text-xs font-bold border border-purple-200">PhonePe</span>
+                                <span class="px-2.5 py-1 rounded-md bg-sky-50 text-sky-700 text-xs font-bold border border-sky-200">Paytm</span>
+                            </div>
+
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-5 items-center">
+                                <div class="sm:col-span-2 space-y-3">
+                                    <label for="upi-id-input" class="block text-sm font-bold text-slate-800">
+                                        Enter Your UPI ID / VPA <span class="text-red-600">*</span>
+                                    </label>
+                                    <input
+                                        type="text"
+                                        id="upi-id-input"
+                                        placeholder="e.g., candidate2026@okicici or 9876543210@upi"
+                                        class="w-full rounded-xl border border-slate-300 px-4 py-3 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-nicRoyal"
+                                    >
+                                    <p class="text-xs text-slate-500">A collect request of <strong>₹ 6,500.00</strong> will be sent to your UPI app.</p>
+                                </div>
+
+                                <!-- Simulated QR Code Placeholder -->
+                                <div class="flex flex-col items-center justify-center p-3 rounded-xl border border-dashed border-slate-300 bg-slate-50 text-center">
+                                    <svg class="w-24 h-24 text-nicNavy" viewBox="0 0 100 100" fill="currentColor" aria-label="Simulated UPI QR Code">
+                                        <rect x="10" y="10" width="25" height="25" fill="none" stroke="currentColor" stroke-width="5"/>
+                                        <rect x="17" y="17" width="11" height="11"/>
+                                        <rect x="65" y="10" width="25" height="25" fill="none" stroke="currentColor" stroke-width="5"/>
+                                        <rect x="72" y="17" width="11" height="11"/>
+                                        <rect x="10" y="65" width="25" height="25" fill="none" stroke="currentColor" stroke-width="5"/>
+                                        <rect x="17" y="72" width="11" height="11"/>
+                                        <rect x="45" y="12" width="8" height="8"/>
+                                        <rect x="45" y="28" width="8" height="16"/>
+                                        <rect x="12" y="45" width="16" height="8"/>
+                                        <rect x="36" y="48" width="12" height="12"/>
+                                        <rect x="56" y="45" width="16" height="8"/>
+                                        <rect x="80" y="45" width="10" height="16"/>
+                                        <rect x="45" y="68" width="12" height="12"/>
+                                        <rect x="65" y="68" width="8" height="22"/>
+                                        <rect x="78" y="76" width="12" height="14"/>
+                                    </svg>
+                                    <span class="text-[10px] font-bold text-slate-600 mt-1">Scan & Pay ₹6,500</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 2. Wallet Panel -->
+                        <div id="panel-Wallet" class="pay-method-panel hidden space-y-4">
+                            <label class="block text-sm font-bold text-slate-800">Select Mobile Wallet <span class="text-red-600">*</span></label>
+                            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="wallet-provider" value="Paytm Wallet" class="peer sr-only" checked>
+                                    <div class="p-3 rounded-xl border-2 border-slate-200 peer-checked:border-nicNavy peer-checked:bg-nicLight text-center text-xs font-bold text-slate-700">
+                                        Paytm Wallet
+                                    </div>
+                                </label>
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="wallet-provider" value="PhonePe Wallet" class="peer sr-only">
+                                    <div class="p-3 rounded-xl border-2 border-slate-200 peer-checked:border-nicNavy peer-checked:bg-nicLight text-center text-xs font-bold text-slate-700">
+                                        PhonePe Wallet
+                                    </div>
+                                </label>
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="wallet-provider" value="Amazon Pay" class="peer sr-only">
+                                    <div class="p-3 rounded-xl border-2 border-slate-200 peer-checked:border-nicNavy peer-checked:bg-nicLight text-center text-xs font-bold text-slate-700">
+                                        Amazon Pay
+                                    </div>
+                                </label>
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="wallet-provider" value="Mobikwik" class="peer sr-only">
+                                    <div class="p-3 rounded-xl border-2 border-slate-200 peer-checked:border-nicNavy peer-checked:bg-nicLight text-center text-xs font-bold text-slate-700">
+                                        Mobikwik
+                                    </div>
+                                </label>
+                            </div>
+
+                            <div>
+                                <label for="wallet-mobile" class="block text-sm font-bold text-slate-800 mb-1.5">
+                                    Registered Wallet Mobile Number <span class="text-red-600">*</span>
+                                </label>
+                                <div class="flex">
+                                    <span class="inline-flex items-center px-3.5 rounded-l-xl border border-r-0 border-slate-300 bg-slate-100 text-slate-600 text-sm font-semibold">+91</span>
+                                    <input
+                                        type="text"
+                                        id="wallet-mobile"
+                                        inputmode="numeric"
+                                        maxlength="10"
+                                        placeholder="Enter 10-digit mobile number"
+                                        class="w-full rounded-r-xl border border-slate-300 px-4 py-3 text-sm font-mono text-slate-800 focus:outline-none focus:ring-2 focus:ring-nicRoyal"
+                                    >
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 3. Credit / Debit Card Panel -->
+                        <div id="panel-Card" class="pay-method-panel hidden space-y-4">
+                            <div>
+                                <label for="card-number" class="block text-sm font-bold text-slate-800 mb-1.5">
+                                    Card Number (RuPay / Visa / Mastercard) <span class="text-red-600">*</span>
+                                </label>
+                                <input
+                                    type="text"
+                                    id="card-number"
+                                    inputmode="numeric"
+                                    maxlength="19"
+                                    placeholder="XXXX XXXX XXXX XXXX"
+                                    class="w-full rounded-xl border border-slate-300 px-4 py-3 text-sm font-mono text-slate-800 focus:outline-none focus:ring-2 focus:ring-nicRoyal"
+                                >
+                            </div>
+
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label for="card-expiry" class="block text-sm font-bold text-slate-800 mb-1.5">
+                                        Expiry Date (MM/YY) <span class="text-red-600">*</span>
+                                    </label>
+                                    <input
+                                        type="text"
+                                        id="card-expiry"
+                                        maxlength="5"
+                                        placeholder="08/29"
+                                        class="w-full rounded-xl border border-slate-300 px-4 py-3 text-sm font-mono text-slate-800 focus:outline-none focus:ring-2 focus:ring-nicRoyal"
+                                    >
+                                </div>
+                                <div>
+                                    <label for="card-cvv" class="block text-sm font-bold text-slate-800 mb-1.5">
+                                        CVV / CVC <span class="text-red-600">*</span>
+                                    </label>
+                                    <input
+                                        type="password"
+                                        id="card-cvv"
+                                        inputmode="numeric"
+                                        maxlength="4"
+                                        placeholder="•••"
+                                        class="w-full rounded-xl border border-slate-300 px-4 py-3 text-sm font-mono text-slate-800 focus:outline-none focus:ring-2 focus:ring-nicRoyal"
+                                    >
+                                </div>
+                            </div>
+
+                            <div>
+                                <label for="card-holder" class="block text-sm font-bold text-slate-800 mb-1.5">
+                                    Cardholder Name <span class="text-red-600">*</span>
+                                </label>
+                                <input
+                                    type="text"
+                                    id="card-holder"
+                                    placeholder="Name printed on card"
+                                    class="w-full rounded-xl border border-slate-300 px-4 py-3 text-sm text-slate-800 uppercase focus:outline-none focus:ring-2 focus:ring-nicRoyal"
+                                >
+                            </div>
+                        </div>
+
+                        <!-- 4. Internet Banking Panel -->
+                        <div id="panel-NetBanking" class="pay-method-panel hidden space-y-4">
+                            <label class="block text-sm font-bold text-slate-800">Select Popular Indian Bank <span class="text-red-600">*</span></label>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                <label class="flex items-center gap-3 p-3 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer">
+                                    <input type="radio" name="netbank-radio" value="State Bank of India (SBI)" class="text-nicNavy focus:ring-nicRoyal" checked>
+                                    <span class="text-sm font-semibold text-slate-800">State Bank of India (SBI)</span>
+                                </label>
+                                <label class="flex items-center gap-3 p-3 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer">
+                                    <input type="radio" name="netbank-radio" value="HDFC Bank" class="text-nicNavy focus:ring-nicRoyal">
+                                    <span class="text-sm font-semibold text-slate-800">HDFC Bank</span>
+                                </label>
+                                <label class="flex items-center gap-3 p-3 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer">
+                                    <input type="radio" name="netbank-radio" value="ICICI Bank" class="text-nicNavy focus:ring-nicRoyal">
+                                    <span class="text-sm font-semibold text-slate-800">ICICI Bank</span>
+                                </label>
+                                <label class="flex items-center gap-3 p-3 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer">
+                                    <input type="radio" name="netbank-radio" value="Axis Bank" class="text-nicNavy focus:ring-nicRoyal">
+                                    <span class="text-sm font-semibold text-slate-800">Axis Bank</span>
+                                </label>
+                                <label class="flex items-center gap-3 p-3 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer">
+                                    <input type="radio" name="netbank-radio" value="Punjab National Bank (PNB)" class="text-nicNavy focus:ring-nicRoyal">
+                                    <span class="text-sm font-semibold text-slate-800">Punjab National Bank (PNB)</span>
+                                </label>
+                                <label class="flex items-center gap-3 p-3 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer">
+                                    <input type="radio" name="netbank-radio" value="Bank of Baroda" class="text-nicNavy focus:ring-nicRoyal">
+                                    <span class="text-sm font-semibold text-slate-800">Bank of Baroda</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Pay Button & Back Button -->
+                        <div class="mt-8 pt-5 border-t border-slate-200 flex flex-col-reverse sm:flex-row justify-between items-center gap-3">
+                            <button
+                                type="button"
+                                onclick="goToStep(2)"
+                                class="w-full sm:w-auto px-6 py-3 rounded-xl border border-slate-300 bg-white hover:bg-slate-50 text-slate-700 font-semibold text-sm transition-all flex items-center justify-center gap-2 cursor-pointer"
+                            >
+                                <i class="fa-solid fa-arrow-left"></i>
+                                <span>Back to Details</span>
+                            </button>
+
+                            <button
+                                type="button"
+                                id="btn-pay-now"
+                                onclick="handlePaymentSubmit()"
+                                class="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-nicGreen hover:bg-emerald-700 text-white font-extrabold text-sm sm:text-base shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2 cursor-pointer"
+                            >
+                                <i class="fa-solid fa-shield-check"></i>
+                                <span>Pay INR 6,500</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===================================================================== -->
+        <!-- STEP 4: PAYMENT CONFIRMATION PAGE & DOWNLOADABLE RECEIPT              -->
+        <!-- ===================================================================== -->
+        <section id="step-4-panel" class="step-panel hidden space-y-6">
+            <div class="print-container bg-white rounded-xl shadow-md border border-slate-200 overflow-hidden">
+                <!-- Official Green Confirmation Banner -->
+                <div class="bg-emerald-700 text-white px-6 py-5 flex flex-col sm:flex-row items-center justify-between gap-4">
+                    <div class="flex items-center gap-4 text-center sm:text-left">
+                        <div class="w-12 h-12 rounded-full bg-white text-emerald-700 flex items-center justify-center text-2xl shrink-0 shadow">
+                            <i class="fa-solid fa-check"></i>
+                        </div>
+                        <div>
+                            <span class="text-xs uppercase tracking-widest text-emerald-100 font-bold">Official Acknowledgment Slip</span>
+                            <h2 class="text-lg sm:text-xl font-extrabold">Round II Counseling Registration & Fee Payment Successful</h2>
+                        </div>
+                    </div>
+                    <div class="px-3.5 py-1.5 rounded-lg bg-emerald-800 border border-emerald-500 text-xs font-mono font-bold tracking-wider">
+                        STATUS: SUCCESS
+                    </div>
+                </div>
+
+                <!-- Receipt Metadata Bar -->
+                <div class="bg-slate-50 border-b border-slate-200 px-6 py-4 grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs sm:text-sm">
+                    <div>
+                        <span class="text-slate-500 block text-xs">Transaction Reference ID</span>
+                        <span id="rec-txn-id" class="font-mono font-extrabold text-nicNavy text-base">MCC2026R2-000000</span>
+                    </div>
+                    <div>
+                        <span class="text-slate-500 block text-xs">Payment Date & Timestamp</span>
+                        <span id="rec-timestamp" class="font-mono font-semibold text-slate-800">--</span>
+                    </div>
+                    <div>
+                        <span class="text-slate-500 block text-xs">Payment Mode</span>
+                        <span id="rec-pay-mode" class="font-bold text-slate-800">--</span>
+                    </div>
+                </div>
+
+                <!-- Structured Candidate & Transaction Summary Table -->
+                <div class="p-6 sm:p-8">
+                    <h3 class="text-sm font-extrabold uppercase tracking-wider text-nicNavy mb-4 border-b border-slate-200 pb-2">
+                        Candidate Registration & Surrender Details
+                    </h3>
+
+                    <div class="overflow-x-auto rounded-xl border border-slate-200">
+                        <table class="w-full text-left border-collapse text-sm">
+                            <tbody class="divide-y divide-slate-200">
+                                <tr class="bg-white">
+                                    <th class="py-3.5 px-4 font-semibold text-slate-600 bg-slate-50 w-1/3 sm:w-2/5">Candidate Full Name</th>
+                                    <td id="rec-name" class="py-3.5 px-4 font-bold text-slate-900 uppercase">--</td>
+                                </tr>
+                                <tr class="bg-white">
+                                    <th class="py-3.5 px-4 font-semibold text-slate-600 bg-slate-50">Age / Gender</th>
+                                    <td id="rec-age-gender" class="py-3.5 px-4 font-medium text-slate-800">--</td>
+                                </tr>
+                                <tr class="bg-white">
+                                    <th class="py-3.5 px-4 font-semibold text-slate-600 bg-slate-50">NTA NEET-UG 2026 Roll Number</th>
+                                    <td id="rec-roll" class="py-3.5 px-4 font-mono font-bold text-nicNavy">--</td>
+                                </tr>
+                                <tr class="bg-white">
+                                    <th class="py-3.5 px-4 font-semibold text-slate-600 bg-slate-50">Identity Number (Masked Aadhaar)</th>
+                                    <td id="rec-aadhaar" class="py-3.5 px-4 font-mono font-semibold text-slate-800">XXXX-XXXX-XXXX</td>
+                                </tr>
+                                <tr class="bg-white">
+                                    <th class="py-3.5 px-4 font-semibold text-slate-600 bg-slate-50">Round I Declaration Status</th>
+                                    <td class="py-3.5 px-4">
+                                        <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-emerald-50 text-emerald-800 border border-emerald-200 text-xs font-bold">
+                                            <i class="fa-solid fa-circle-check text-emerald-600"></i> Verified & Accepted
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr class="bg-white">
+                                    <th class="py-3.5 px-4 font-semibold text-slate-600 bg-slate-50">Handed Over College (Round I 3rd Choice)</th>
+                                    <td id="rec-college" class="py-3.5 px-4 font-medium text-slate-800">--</td>
+                                </tr>
+                                <tr class="bg-nicLight">
+                                    <th class="py-4 px-4 font-extrabold text-nicNavy">Round II Registration Amount Paid</th>
+                                    <td class="py-4 px-4 font-mono font-extrabold text-lg text-emerald-700">₹ 6,500.00 <span class="text-xs font-sans font-normal text-slate-600">(INR Six Thousand Five Hundred Only)</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Official Footer Note inside Slip -->
+                    <div class="mt-6 p-4 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-600 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+                        <div>
+                            <p class="font-semibold text-slate-800">Computer Generated Confirmation Receipt</p>
+                            <p class="mt-0.5">Candidates are advised to retain a printed/digital copy of this slip for Round II Choice Filling & Document Verification.</p>
+                        </div>
+                        <div class="text-right shrink-0 font-mono text-[11px] text-slate-400">
+                            NIC-MCC-UG-2026-R2
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Action Buttons (Hidden when printing) -->
+            <div class="flex flex-col sm:flex-row flex-wrap items-center justify-between gap-3 pt-2 no-print">
+                <button
+                    type="button"
+                    onclick="resetApplication()"
+                    class="w-full sm:w-auto px-5 py-3 rounded-xl border border-slate-300 bg-white hover:bg-slate-50 text-slate-700 font-semibold text-sm transition-all flex items-center justify-center gap-2 cursor-pointer"
+                >
+                    <i class="fa-solid fa-rotate-left"></i>
+                    <span>Start New Registration</span>
+                </button>
+
+                <div class="w-full sm:w-auto flex flex-col sm:flex-row gap-3">
+                    <button
+                        type="button"
+                        onclick="downloadHtmlReceipt()"
+                        class="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-nicRoyal hover:bg-nicNavy text-white font-bold text-sm shadow-sm hover:shadow transition-all flex items-center justify-center gap-2 cursor-pointer"
+                    >
+                        <i class="fa-solid fa-file-arrow-down"></i>
+                        <span>Download Confirmation Slip (.HTML / Receipt)</span>
+                    </button>
+
+                    <button
+                        type="button"
+                        onclick="window.print()"
+                        class="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-nicNavy hover:bg-slate-900 text-white font-bold text-sm shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2 cursor-pointer"
+                    >
+                        <i class="fa-solid fa-print"></i>
+                        <span>Download Confirmation Page (PDF / Print)</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Simulated Payment Processing Overlay Modal -->
+    <div id="payment-processing-modal" class="hidden fixed inset-0 z-50 bg-slate-900/70 backdrop-blur-xs flex items-center justify-center p-4 no-print">
+        <div class="bg-white rounded-2xl max-w-md w-full p-6 sm:p-8 text-center shadow-2xl border border-slate-200 space-y-4">
+            <div class="w-16 h-16 mx-auto rounded-full border-4 border-blue-100 border-t-nicNavy animate-spin"></div>
+            <h3 class="text-lg font-extrabold text-nicNavy">Processing Transaction with Bank Gateway...</h3>
+            <p class="text-sm text-slate-600">
+                Please do not refresh, close, or press the back button while we verify your payment of <strong>₹ 6,500.00</strong>.
+            </p>
+            <div class="pt-2">
+                <span class="inline-block px-3 py-1 rounded-full bg-slate-100 text-xs font-mono text-slate-500">
+                    Connecting to NIC-Pay Secure Server...
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Official Portal Footer -->
+    <footer class="bg-[#092744] text-blue-100 text-xs mt-12 border-t-4 border-nicSaffron no-print">
+        <div class="max-w-6xl mx-auto px-4 py-6 flex flex-col md:flex-row justify-between items-center gap-4 text-center md:text-left">
+            <div>
+                <p class="font-bold text-white text-sm">Medical Counselling Committee (MCC), DGHS</p>
+                <p class="text-blue-200 mt-1">Ministry of Health & Family Welfare, Government of India</p>
+            </div>
+            <div class="text-blue-200 md:text-right">
+                <p>Designed, Developed & Hosted by <strong>National Informatics Centre (NIC)</strong></p>
+                <p class="mt-1 text-[11px] text-blue-300">Prototype UI Simulation &bull; NEET-UG 2026 Round II Counselling</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Application Logic -->
+    <script>
+        // Centralized Application State
+        const appState = {
+            currentStep: 1,
+            declarationAccepted: false,
+            handoverCollege: '',
+            candidate: {
+                name: '',
+                age: '',
+                gender: '',
+                rollNumber: '',
+                aadhaarRaw: '',
+                aadhaarMasked: ''
+            },
+            payment: {
+                method: 'UPI',
+                subDetail: '',
+                amount: '6,500.00',
+                transactionId: '',
+                timestamp: ''
+            }
+        };
+
+        // Live IST Clock in Header
+        function updateClock() {
+            const clockEl = document.getElementById('live-clock');
+            if (!clockEl) return;
+            const now = new Date();
+            clockEl.textContent = now.toLocaleTimeString('en-IN', {
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: true
+            }) + ' IST';
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        // Custom Alert Banner Helper (Replaces window.alert)
+        function showAlert(title, message, type = 'error') {
+            const box = document.getElementById('alert-box');
+            const icon = document.getElementById('alert-icon');
+            const titleEl = document.getElementById('alert-title');
+            const msgEl = document.getElementById('alert-message');
+
+            box.className = 'mb-6 rounded-xl p-4 border flex items-start gap-3 shadow-sm transition-all no-print';
+            if (type === 'error') {
+                box.classList.add('bg-red-50', 'border-red-300', 'text-red-900');
+                icon.className = 'fa-solid fa-circle-exclamation mt-0.5 text-lg text-red-600';
+            } else {
+                box.classList.add('bg-emerald-50', 'border-emerald-300', 'text-emerald-900');
+                icon.className = 'fa-solid fa-circle-check mt-0.5 text-lg text-emerald-600';
+            }
+
+            titleEl.textContent = title;
+            msgEl.textContent = message;
+            box.classList.remove('hidden');
+            box.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        function hideAlert() {
+            document.getElementById('alert-box').classList.add('hidden');
+        }
+
+        // Step Navigation & Stepper UI Update
+        function goToStep(stepNumber) {
+            hideAlert();
+            appState.currentStep = stepNumber;
+
+            // Hide all step panels
+            for (let i = 1; i <= 4; i++) {
+                document.getElementById(`step-${i}-panel`).classList.add('hidden');
+                const stepperEl = document.getElementById(`stepper-${i}`);
+                const circle = stepperEl.querySelector('.step-circle');
+                const label = stepperEl.querySelector('.step-label');
+
+                if (i < stepNumber) {
+                    // Completed step
+                    circle.className = 'step-circle w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center font-bold text-sm bg-nicGreen text-white transition-all';
+                    circle.innerHTML = '<i class="fa-solid fa-check"></i>';
+                    label.className = 'step-label mt-2 text-[11px] sm:text-xs font-bold text-nicGreen leading-tight';
+                } else if (i === stepNumber) {
+                    // Active step
+                    circle.className = 'step-circle w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center font-bold text-sm bg-nicNavy text-white ring-4 ring-blue-100 transition-all';
+                    circle.textContent = i;
+                    label.className = 'step-label mt-2 text-[11px] sm:text-xs font-bold text-nicNavy leading-tight';
+                } else {
+                    // Upcoming step
+                    circle.className = 'step-circle w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center font-bold text-sm bg-slate-200 text-slate-600 transition-all';
+                    circle.textContent = i;
+                    label.className = 'step-label mt-2 text-[11px] sm:text-xs font-medium text-slate-500 leading-tight';
+                }
+            }
+
+            // Show target step panel
+            document.getElementById(`step-${stepNumber}-panel`).classList.remove('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // =========================================================================
+        // STEP 1 VALIDATION & SUBMISSION
+        // =========================================================================
+        function handleStep1Submit() {
+            const checkbox = document.getElementById('round1-declaration-checkbox');
+            const collegeInput = document.getElementById('handover-college-input');
+            const errCheckbox = document.getElementById('err-checkbox');
+            const errCollege = document.getElementById('err-college');
+            const declarationCard = document.getElementById('declaration-card');
+
+            let isValid = true;
+            const collegeText = collegeInput.value.trim();
+
+            if (!checkbox.checked) {
+                errCheckbox.classList.remove('hidden');
+                declarationCard.classList.add('border-red-400', 'bg-red-50/40');
+                isValid = false;
+            } else {
+                errCheckbox.classList.add('hidden');
+                declarationCard.classList.remove('border-red-400', 'bg-red-50/40');
+            }
+
+            if (collegeText.length < 5) {
+                errCollege.classList.remove('hidden');
+                collegeInput.classList.add('border-red-500');
+                isValid = false;
+            } else {
+                errCollege.classList.add('hidden');
+                collegeInput.classList.remove('border-red-500');
+            }
+
+            if (!isValid) {
+                showAlert(
+                    'Round I Declaration Incomplete',
+                    'Please check the declaration box and provide the full name of your Round I 3rd choice college before proceeding.'
+                );
+                return;
+            }
+
+            appState.declarationAccepted = true;
+            appState.handoverCollege = collegeText;
+
+            // Update preview badge in Step 2
+            document.getElementById('step2-college-preview').textContent = collegeText;
+            goToStep(2);
+        }
+
+        // =========================================================================
+        // STEP 2 INPUT FORMATTING & VALIDATION
+        // =========================================================================
+        // Auto-format 12-digit Aadhaar with spaces (XXXX XXXX XXXX)
+        document.getElementById('cand-aadhaar').addEventListener('input', function (e) {
+            const digits = e.target.value.replace(/\D/g, '').substring(0, 12);
+            const parts = digits.match(/.{1,4}/g);
+            e.target.value = parts ? parts.join(' ') : '';
+        });
+
+        // Restrict NEET Roll Number to digits only
+        document.getElementById('cand-roll').addEventListener('input', function (e) {
+            e.target.value = e.target.value.replace(/\D/g, '').substring(0, 10);
+        });
+
+        function handleStep2Submit() {
+            const nameEl = document.getElementById('cand-name');
+            const ageEl = document.getElementById('cand-age');
+            const genderEl = document.getElementById('cand-gender');
+            const rollEl = document.getElementById('cand-roll');
+            const aadhaarEl = document.getElementById('cand-aadhaar');
+
+            const nameVal = nameEl.value.trim().toUpperCase();
+            const ageVal = parseInt(ageEl.value, 10);
+            const genderVal = genderEl.value;
+            const rollVal = rollEl.value.trim();
+            const aadhaarDigits = aadhaarEl.value.replace(/\D/g, '');
+
+            let isValid = true;
+
+            // Validate Name
+            const errName = document.getElementById('err-name');
+            if (nameVal.length < 3 || !/^[A-Z\s.]+$/.test(nameVal)) {
+                errName.textContent = 'Please enter a valid full name (alphabets only, minimum 3 characters).';
+                errName.classList.remove('hidden');
+                nameEl.classList.add('border-red-500');
+                isValid = false;
+            } else {
+                errName.classList.add('hidden');
+                nameEl.classList.remove('border-red-500');
+            }
+
+            // Validate Age (17 - 45)
+            const errAge = document.getElementById('err-age');
+            if (isNaN(ageVal) || ageVal < 17 || ageVal > 45) {
+                errAge.textContent = 'Candidate age must be between 17 and 45 years for NEET-UG Counselling.';
+                errAge.classList.remove('hidden');
+                ageEl.classList.add('border-red-500');
+                isValid = false;
+            } else {
+                errAge.classList.add('hidden');
+                ageEl.classList.remove('border-red-500');
+            }
+
+            // Validate Gender
+            const errGender = document.getElementById('err-gender');
+            if (!genderVal) {
+                errGender.textContent = 'Please select your gender.';
+                errGender.classList.remove('hidden');
+                genderEl.classList.add('border-red-500');
+                isValid = false;
+            } else {
+                errGender.classList.add('hidden');
+                genderEl.classList.remove('border-red-500');
+            }
+
+            // Validate 10-digit NEET Roll Number
+            const errRoll = document.getElementById('err-roll');
+            if (!/^\d{10}$/.test(rollVal)) {
+                errRoll.textContent = 'NTA NEET-UG Roll Number must be exactly 10 digits.';
+                errRoll.classList.remove('hidden');
+                rollEl.classList.add('border-red-500');
+                isValid = false;
+            } else {
+                errRoll.classList.add('hidden');
+                rollEl.classList.remove('border-red-500');
+            }
+
+            // Validate 12-digit Aadhaar Number
+            const errAadhaar = document.getElementById('err-aadhaar');
+            if (!/^\d{12}$/.test(aadhaarDigits)) {
+                errAadhaar.textContent = 'Please enter a valid 12-digit Aadhaar Identity Number.';
+                errAadhaar.classList.remove('hidden');
+                aadhaarEl.classList.add('border-red-500');
+                isValid = false;
+            } else {
+                errAadhaar.classList.add('hidden');
+                aadhaarEl.classList.remove('border-red-500');
+            }
+
+            if (!isValid) {
+                showAlert(
+                    'Candidate Details Verification Failed',
+                    'Please correct the highlighted fields below before proceeding to fee payment.'
+                );
+                return;
+            }
+
+            // Save candidate details & mask Aadhaar (XXXX-XXXX-1234)
+            const last4 = aadhaarDigits.slice(-4);
+            appState.candidate = {
+                name: nameVal,
+                age: ageVal,
+                gender: genderVal,
+                rollNumber: rollVal,
+                aadhaarRaw: aadhaarDigits,
+                aadhaarMasked: `XXXX-XXXX-${last4}`
+            };
+
+            // Populate Step 3 Summary
+            document.getElementById('pay-summary-name').textContent = appState.candidate.name;
+            document.getElementById('pay-summary-roll').textContent = appState.candidate.rollNumber;
+
+            goToStep(3);
+        }
+
+        // =========================================================================
+        // STEP 3 PAYMENT GATEWAY TABS & PROCESSING
+        // =========================================================================
+        function selectPaymentMethod(method) {
+            hideAlert();
+            appState.payment.method = method;
+
+            const tabMap = {
+                'UPI': 'tab-UPI',
+                'Wallet': 'tab-Wallet',
+                'Credit / Debit Card': 'tab-Card',
+                'Internet Banking': 'tab-NetBanking'
+            };
+
+            const panelMap = {
+                'UPI': 'panel-UPI',
+                'Wallet': 'panel-Wallet',
+                'Credit / Debit Card': 'panel-Card',
+                'Internet Banking': 'panel-NetBanking'
+            };
+
+            // Reset all tabs
+            Object.values(tabMap).forEach(id => {
+                const el = document.getElementById(id);
+                el.className = 'pay-tab flex flex-col items-center justify-center p-3 rounded-xl border-2 border-slate-200 bg-white hover:bg-slate-50 text-slate-600 font-semibold text-xs sm:text-sm transition-all cursor-pointer';
+            });
+
+            // Highlight active tab
+            const activeTab = document.getElementById(tabMap[method]);
+            activeTab.className = 'pay-tab active flex flex-col items-center justify-center p-3 rounded-xl border-2 border-nicNavy bg-nicLight text-nicNavy font-bold text-xs sm:text-sm transition-all cursor-pointer';
+
+            // Toggle panels
+            Object.values(panelMap).forEach(id => document.getElementById(id).classList.add('hidden'));
+            document.getElementById(panelMap[method]).classList.remove('hidden');
+        }
+
+        // Card formatting helpers
+        document.getElementById('card-number').addEventListener('input', function (e) {
+            const digits = e.target.value.replace(/\D/g, '').substring(0, 16);
+            const parts = digits.match(/.{1,4}/g);
+            e.target.value = parts ? parts.join(' ') : '';
+        });
+
+        document.getElementById('card-expiry').addEventListener('input', function (e) {
+            let val = e.target.value.replace(/\D/g, '').substring(0, 4);
+            if (val.length >= 3) {
+                val = val.substring(0, 2) + '/' + val.substring(2);
+            }
+            e.target.value = val;
+        });
+
+        document.getElementById('wallet-mobile').addEventListener('input', function (e) {
+            e.target.value = e.target.value.replace(/\D/g, '').substring(0, 10);
+        });
+
+        function handlePaymentSubmit() {
+            hideAlert();
+            const method = appState.payment.method;
+            let subDetail = '';
+
+            if (method === 'UPI') {
+                const upiId = document.getElementById('upi-id-input').value.trim();
+                if (!upiId || !upiId.includes('@') || upiId.length < 5) {
+                    showAlert('Invalid UPI ID', 'Please enter a valid UPI ID / VPA (e.g., name@okicici or mobile@upi).');
+                    return;
+                }
+                subDetail = `UPI (${upiId})`;
+            } else if (method === 'Wallet') {
+                const provider = document.querySelector('input[name="wallet-provider"]:checked').value;
+                const mobile = document.getElementById('wallet-mobile').value.trim();
+                if (!/^\d{10}$/.test(mobile)) {
+                    showAlert('Invalid Mobile Number', 'Please enter a valid 10-digit mobile number linked to your wallet.');
+                    return;
+                }
+                subDetail = `${provider} (+91-${mobile})`;
+            } else if (method === 'Credit / Debit Card') {
+                const cardDigits = document.getElementById('card-number').value.replace(/\D/g, '');
+                const expiry = document.getElementById('card-expiry').value.trim();
+                const cvv = document.getElementById('card-cvv').value.trim();
+                const holder = document.getElementById('card-holder').value.trim();
+
+                if (cardDigits.length < 13 || !/^\d{2}\/\d{2}$/.test(expiry) || cvv.length < 3 || holder.length < 2) {
+                    showAlert('Incomplete Card Details', 'Please enter a valid card number, expiry date (MM/YY), CVV, and cardholder name.');
+                    return;
+                }
+                subDetail = `Card Ending •••• ${cardDigits.slice(-4)}`;
+            } else if (method === 'Internet Banking') {
+                const bank = document.querySelector('input[name="netbank-radio"]:checked').value;
+                subDetail = `Net Banking (${bank})`;
+            }
+
+            // Show simulated bank processing modal
+            const modal = document.getElementById('payment-processing-modal');
+            modal.classList.remove('hidden');
+
+            setTimeout(() => {
+                modal.classList.add('hidden');
+
+                // Generate Transaction ID & Timestamp
+                const randomDigits = Math.floor(100000 + Math.random() * 900000);
+                const now = new Date();
+                const formattedTimestamp = now.toLocaleDateString('en-IN', {
+                    day: '2-digit',
+                    month: 'short',
+                    year: 'numeric'
+                }) + ' at ' + now.toLocaleTimeString('en-IN', {
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    second: '2-digit',
+                    hour12: true
+                }) + ' IST';
+
+                appState.payment.transactionId = `MCC2026R2-${randomDigits}`;
+                appState.payment.timestamp = formattedTimestamp;
+                appState.payment.subDetail = subDetail;
+
+                populateConfirmationReceipt();
+                goToStep(4);
+            }, 1800);
+        }
+
+        // =========================================================================
+        // STEP 4 CONFIRMATION RECEIPT & CLIENT-SIDE FILE DOWNLOAD
+        // =========================================================================
+        function populateConfirmationReceipt() {
+            document.getElementById('rec-txn-id').textContent = appState.payment.transactionId;
+            document.getElementById('rec-timestamp').textContent = appState.payment.timestamp;
+            document.getElementById('rec-pay-mode').textContent = appState.payment.subDetail;
+
+            document.getElementById('rec-name').textContent = appState.candidate.name;
+            document.getElementById('rec-age-gender').textContent = `${appState.candidate.age} Years / ${appState.candidate.gender}`;
+            document.getElementById('rec-roll').textContent = appState.candidate.rollNumber;
+            document.getElementById('rec-aadhaar').textContent = appState.candidate.aadhaarMasked;
+            document.getElementById('rec-college').textContent = appState.handoverCollege;
+        }
+
+        function downloadHtmlReceipt() {
+            const receiptHtml = `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>MCC Round II 2026 Confirmation Slip - ${appState.payment.transactionId}</title>
+<style>
+  body { font-family: Arial, Helvetica, sans-serif; color: #1e293b; margin: 24px; background: #fff; }
+  .box { max-width: 780px; margin: 0 auto; border: 2px solid #0f3d68; border-radius: 8px; overflow: hidden; }
+  .header { background: #0f3d68; color: #fff; padding: 18px 24px; }
+  .header h1 { margin: 0; font-size: 20px; }
+  .header p { margin: 4px 0 0; font-size: 13px; color: #dbeafe; }
+  .status-bar { background: #ecfdf5; border-bottom: 1px solid #a7f3d0; color: #065f46; padding: 12px 24px; font-weight: bold; font-size: 14px; }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  th, td { padding: 12px 18px; border-bottom: 1px solid #e2e8f0; text-align: left; }
+  th { background: #f8fafc; width: 42%; color: #475569; }
+  .amount { background: #eef4fa; font-weight: bold; color: #0f3d68; font-size: 16px; }
+  .footer { padding: 14px 24px; font-size: 11px; color: #64748b; background: #f8fafc; }
+</style>
+</head>
+<body>
+  <div class="box">
+    <div class="header">
+      <h1>Medical Counselling Committee (MCC) - UG Medical Counselling 2026</h1>
+      <p>Government of India | Ministry of Health & Family Welfare &mdash; Round II Confirmation Receipt</p>
+    </div>
+    <div class="status-bar">
+      STATUS: PAYMENT SUCCESSFUL &bull; Transaction Ref ID: ${appState.payment.transactionId}
+    </div>
+    <table>
+      <tr><th>Payment Date & Timestamp</th><td>${appState.payment.timestamp}</td></tr>
+      <tr><th>Payment Mode</th><td>${appState.payment.subDetail}</td></tr>
+      <tr><th>Candidate Full Name</th><td><strong>${appState.candidate.name}</strong></td></tr>
+      <tr><th>Age / Gender</th><td>${appState.candidate.age} Years / ${appState.candidate.gender}</td></tr>
+      <tr><th>NTA NEET-UG 2026 Roll Number</th><td><strong>${appState.candidate.rollNumber}</strong></td></tr>
+      <tr><th>Identity Number (Masked Aadhaar)</th><td>${appState.candidate.aadhaarMasked}</td></tr>
+      <tr><th>Round I Declaration Status</th><td>Verified & Accepted (3rd Choice Surrendered)</td></tr>
+      <tr><th>Handed Over College (Round I 3rd Choice)</th><td>${appState.handoverCollege}</td></tr>
+      <tr class="amount"><th>Round II Registration Fee Paid</th><td>INR 6,500.00 (Six Thousand Five Hundred Only)</td></tr>
+    </table>
+    <div class="footer">
+      This is a computer-generated acknowledgment slip for MCC NEET-UG Round II 2026 Counseling Simulation Portal.
+    </div>
+  </div>
+</body>
+</html>`;
+
+            const blob = new Blob([receiptHtml], { type: 'text/html;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `MCC_Round2_2026_Receipt_${appState.candidate.rollNumber}.html`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        function resetApplication() {
+            // Clear inputs
+            document.getElementById('round1-declaration-checkbox').checked = false;
+            document.getElementById('handover-college-input').value = '';
+            document.getElementById('candidate-details-form').reset();
+            document.getElementById('upi-id-input').value = '';
+            document.getElementById('wallet-mobile').value = '';
+            document.getElementById('card-number').value = '';
+            document.getElementById('card-expiry').value = '';
+            document.getElementById('card-cvv').value = '';
+            document.getElementById('card-holder').value = '';
+
+            selectPaymentMethod('UPI');
+            goToStep(1);
+        }
+    </script>
+</body>
+</html>
